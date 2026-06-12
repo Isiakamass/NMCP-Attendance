@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NMCP Attendance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+font-family:Arial;
+max-width:600px;
+margin:auto;
+padding:20px;
+}
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+}
+button{
+width:100%;
+padding:15px;
+}
+</style>
+</head>
+<body>
+
+<h1>NMCP Attendance Register</h1>
+
+<form id="attendanceForm">
+
+<input type="text"
+id="firstName"
+placeholder="First Name"
+required>
+
+<input type="text"
+id="lastName"
+placeholder="Last Name"
+required>
+
+<input type="email"
+id="email"
+placeholder="Email"
+required>
+
+<input type="text"
+id="phone"
+placeholder="Phone Number"
+required>
+
+<input type="text"
+id="organization"
+placeholder="Organization"
+required>
+
+<button type="submit">
+Sign In
+</button>
+
+</form>
+
+<p id="result"></p>
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbyogxcdr3WG7EkOfkEl9U_QVN28j2CbPz6EMddJyMKsWzJ08sGxqrEPaWP0XXM42e0OgQ/exec
+";
+
+document
+.getElementById("attendanceForm")
+.addEventListener("submit",
+async function(e){
+
+e.preventDefault();
+
+const data = {
+firstName:
+document.getElementById("firstName").value,
+
+lastName:
+document.getElementById("lastName").value,
+
+email:
+document.getElementById("email").value,
+
+phone:
+document.getElementById("phone").value,
+
+organization:
+document.getElementById("organization").value,
+
+event:
+"NMCP Workshop"
+};
+
+try{
+
+await fetch(WEB_APP_URL,{
+method:"POST",
+body:JSON.stringify(data)
+});
+
+document.getElementById("result").innerHTML =
+"Attendance Recorded Successfully";
+
+}
+catch(error){
+
+document.getElementById("result").innerHTML =
+error;
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
